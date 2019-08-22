@@ -26,7 +26,28 @@ public class ShellSort {
             }
         }
     }
-    public static void shellSort2(){
+    public static void shellSort2(int [] arr){
+        //outer loop with cal gap, gap begin with arr.length/2
+        for(int gap = arr.length / 2; gap > 0; gap /= 2) {
+            // i = gap, i++, compare arr[i] with arr[i-gap]
+            for(int i = gap; i < arr.length; i++) {
+                int point = i;
+                //
+                int temp = arr[i];
+                //check whether arr[i] > arr[i-gap], else inital insert sort process until next loop
+                if (arr[i] < arr[i - gap]) {
+                    //check point = point - gap and temp(min) < arr [point-gap]
+                    while(point - gap >= 0 && temp < arr[point - gap]) {
+                       // if temp(min) < arr [point-gap]
+                        //swap point and point - gap. cuz point already swap with point + gap,. but temp already keep min
+                        arr[point] = arr[point - gap];
+                        point -= gap;
+                    }
+                    //finaly, temp >  arr[point - gap], swap with its next one point - gap +gap( same as insert)
+                    arr[point] = temp;
+                }
+            }
+        }
 
     }
 
@@ -40,7 +61,7 @@ public class ShellSort {
         System.out.println(Arrays.toString(a));
 
         System.out.println("shell sort");
-        shellSort(a);
+        shellSort2(a);
         System.out.println(Arrays.toString(a));
     }
 }
