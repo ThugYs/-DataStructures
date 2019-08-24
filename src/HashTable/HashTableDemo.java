@@ -21,15 +21,28 @@ public class HashTableDemo {
             System.out.println("add:  添加雇员");
             System.out.println("list: 显示雇员");
             System.out.println("find: 查找雇员");
+            System.out.println("delete: 删除雇员");
             System.out.println("exit: 退出系统");
 
             key = scanner.next();
             switch (key) {
                 case "add":
                     System.out.println("输入id");
-                    int id = scanner.nextInt();
+                    int id = 0;
+                    int value =0 ;
+                    try{
+                        id = scanner.nextInt();
+                        System.out.println("输入value");
+                        value = scanner.nextInt();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        continue;
+                    }
+                    finally {
+                        System.out.println("value:"+value);
+                    }
                     //创建 雇员
-                    Node emp = new Node(id);
+                    Node emp = new Node(id,value,null);
                     hashTab.add(emp);
                     break;
                 case "list":
@@ -39,6 +52,11 @@ public class HashTableDemo {
                     System.out.println("请输入要查找的id");
                     id = scanner.nextInt();
                     hashTab.select(id);
+                    break;
+                case "remove":
+                System.out.println("请输入要删除的的id");
+                    id = scanner.nextInt();
+                    hashTab.delete(id);
                     break;
                 case "exit":
                     scanner.close();
@@ -90,6 +108,9 @@ class HashTable{
 
     }
     void delete(Integer key){
+        int index = locate(key);
+
+        list[index].remove(key);
 
     }
     Node select(Integer key){
@@ -145,29 +166,38 @@ class ElementList{
         }
         Node point = head.next;
         while(point.next != null){
+            if(point.key == newNode.key){
+                point.value = newNode.value;
+                return;
+            }
             point = point.next;
         }
         point.next = newNode;
-
     }
+
     void remove(Integer key){
-        if(head.next.next == null ){
-            if(head.next.key == key){
-                head.next = null;
-            }
-        }
+
         if(isEmpty()){
             return;
         }
         Node point = head.next;
         Node pre = head;
-        while(point.next!= null){
+        while(true){
+            //loop until last one, del all the key Node,
+            //find key, and
             if(point.key == key){
                 pre.next = point.next;
+                System.out.println("remove key:"+key);
+                return;
+
+            }
+            if(point.next == null){
+                System.out.println("none");
+                return;
             }
             point = point.next;
+            pre = pre.next;
         }
-
     }
     Node select(int key){
         if(isEmpty()){
@@ -184,7 +214,7 @@ class ElementList{
         }
         return null;
     }
-    boolean update(Integer key, Integer value, Node head){
+    boolean update(Integer key, Integer value){
 
         Node point = head;
         while(point.next != null){
@@ -215,7 +245,7 @@ class ElementList{
         System.out.print("第 "+(key+1)+" 链表的信息为");
         Node curEmp = head; //辅助指针
         while(true) {
-            System.out.printf(" => id=%d name=%s\t", curEmp.key,curEmp.value);
+            System.out.printf(" => id=%d value=%d\t", curEmp.key,curEmp.value);
             if(curEmp.next == null) {//说明curEmp已经是最后结点
                 break;
             }
