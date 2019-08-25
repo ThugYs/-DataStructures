@@ -72,7 +72,6 @@ public class Traversal {
             }
             // get peek element/ father of temp
             temp = nodeStack.peek();
-            //如果其右子树也为空，或者右子树已经访问,则可以直接输出当前节点的值
             if (temp.right == null || temp.right == lastVisit) {
 
                 System.out.println(temp.val);
