@@ -29,6 +29,10 @@ public class BinarySearchTree <E extends Comparable<E>>{
     private Node root;
     private int size;
 
+    public Node getRoot() {
+        return root;
+    }
+
     /***
      * the intiatal BinarySearchTree is null root and size = 0;
      */
@@ -344,6 +348,39 @@ public class BinarySearchTree <E extends Comparable<E>>{
             if (cur.right != null) {
                 queue.add(cur.right);
             }
+        }
+    }
+    public void preorderTranversal(Node root){
+        if(root != null){
+            //first into stack is root = root.left, and until root.left = null,
+            // all left branch has been tranversaled and print.
+            System.out.println(root.e+ "");
+            //pop from stack until,  root, in this process, all left child tree has been tranveral
+            preorderTranversal(root.left);
+            preorderTranversal(root.right);
+        }
+    }
+    /***
+     * left mid right
+     * @param root
+     */
+    public void midorderTranversal(Node root){
+        if(root !=null){
+            midorderTranversal(root.left);
+            System.out.println(root.e+" ");
+            midorderTranversal(root.right);
+        }
+    }
+
+    /***
+     * left right mid
+     * @param root
+     */
+    public void postorderTranversal(Node root){
+        if(root !=null){
+            postorderTranversal(root.left);
+            postorderTranversal(root.right);
+            System.out.println(root.e);
         }
     }
 
