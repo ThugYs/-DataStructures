@@ -32,6 +32,7 @@ public class LongestPalindromeSubstring {
             int len = Math.max(len1, len2);
             if (len > end - start) {
                 start = i - (len - 1) / 2;
+                //举个例子，比如 1 1 i i+1 1 1， len = 6, len-1/2 =2, len/2 = 3;
                 end = i + len / 2;
             }
         }
