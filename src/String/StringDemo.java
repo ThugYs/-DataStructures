@@ -24,13 +24,10 @@ public class StringDemo {
         //字符串的特点：1、一旦被赋值，就不能改变
         /***
          * 首先String s = “hello”; 在方法区中寻找常量”hello”，找不到直接新建，
-         * s += “world”;先在方法区找”world”找不到直接新建，
+         * s += “world”;yeme先在方法区找”world”找不到直接新建，
          * 在执行+=时，把”hello” 与 “world”拼接成新的常量为”helloworld”
          * 然后把”helloworld”的地址赋给String的引用
          */
-        String s = "hello";
-        s += "world";
-        System.out.println("s="+s);//s=helloworld
         /**
          * 面试题：
          * String s = “hello”;和String s = new String(“hello”);的区别：
@@ -45,14 +42,20 @@ public class StringDemo {
 //        System.out.println(s1 == s2);
 //        System.out.println(s1.equals(s2));
 
+        System.out.println("-------");
         String s1 = "hello";
         String s2 = "world";
         String s3 = "helloworld";
-        System.out.println(s3 == s2 + "hello");//false
-        System.out.println(s3 == s2 + s1);//false
-        System.out.println(s3.equals(s1+s2));
-        System.out.println(s3 == "hello"+"world");
-        System.out.println(s3.equals("hello"+"world"));
+        String s4 = "hello" +"world";
+
+        System.out.println(s3 == s1 + s2); //false 重载了+运算符
+        System.out.println(s3 == s1 + "world");//false 同上
+        System.out.println(s3 == s4);//true 只是重载了String变量的，直接字符串运算的话，没有改，还是去变量池里面找有没有
+
+        System.out.println(s3.equals(s1+s2));//true
+        System.out.println(s3 == "hello"+"world");//true 只是重载了String变量的，直接字符串运算的话，没有改，还是去变量池里面找有没有
+        System.out.println(s3.equals("hello"+"world")); //true
+        s1 += "world";
         //StringBuffer
         System.out.println("StringBuffer");
         StringBuffer sb1 = new StringBuffer("hello");
@@ -79,15 +82,7 @@ public class StringDemo {
         System.out.println(s5 == s6); //true
         System.out.println(s5.equals(s6));//true
     }
-    public void concat(){
-        String s1 = "hello";
-        String s2 = "world";
-        String s3 = "helloworld";
-        System.out.println(s3 == s2 + s1);
-        System.out.println(s3.equals(s1+s2));
-        System.out.println(s3 == "hello"+"world");
-        System.out.println(s3.equals("hello"+"world"));
-    }
+
 
 
     public static void change(StringBuffer str1, StringBuffer str2) {
