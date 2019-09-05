@@ -36,11 +36,9 @@ public class StringDemo {
          *
          * 而s = “hello”就mei有在堆内存上新建对象的步骤！
          */
-        //s1 -->堆一个内存块--> String pool 里面
-//        String s1 = new String("hello");
-//        String s2 = "hello";
-//        System.out.println(s1 == s2);
-//        System.out.println(s1.equals(s2));
+        // 它在做运算的时候（s2 = s1+s2） 却新建了一个字符串"helloworld"
+        // 放在常量池中，再加上之前的两个(s1,s2)，一共有三个地址。change方法中的s2指向"helloworld"
+        // 但主方法中的s1、s2依然指向的原来的地址("hello"、"world")，其中的内容没有任何的改变，所以说是值传递。
 
         System.out.println("-------");
         String s1 = "hello";
