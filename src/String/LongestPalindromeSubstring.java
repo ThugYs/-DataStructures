@@ -1,6 +1,6 @@
 package String;
 /***
- * 方法三：动态规划
+ * 方法三：动态规划(pending)
  * 为了改进暴力法，我们首先观察如何避免在验证回文时进行不必要的重复计算。
  * 考虑“ababa” 这个示例。如果我们已经知道 “bab” 是回文，那么很明显“ababa” 一定是回文，因为它的左首字母和右尾字母是相同的。
  * 我们给出 P(i,j) 的定义如下：
@@ -21,31 +21,58 @@ public class LongestPalindromeSubstring {
      */
     public String longestPalindrome(String s) {
         if (s == null || s.length() < 1) {
-            return "";
+            return s;
         }
-        int start = 0, end = 0; //
-        for (int i = 0; i < s.length(); i++) {
-            // 一个奇数的为核心，abcba
+        //end - start = array.length
+        int start = 0, end = 0;//define two point, fowards to opponent direction
+        for (int i = 0; i < s.length();i++) {
             int len1 = expandAroundCenter(s, i, i);
-            //偶数的cc当核心 abccba
             int len2 = expandAroundCenter(s, i, i + 1);
             int len = Math.max(len1, len2);
+            //len和之前的最长相等也更新一下 不然end-start+1
             if (len > end - start) {
-                start = i - (len - 1) / 2;
-                //举个例子，比如 1 1 i i+1 1 1， len = 6, len-1/2 =2, len/2 = 3;
                 end = i + len / 2;
+                // i  i+1举个例子，比如 1 1 i i+1 1 1， len = 6, len-1/2 =2, len/2 = 3;
+                start = i - (len - 1) / 2;
             }
         }
-        return s.substring(start, end + 1);
+
+        return s.substring(start, end+1);
     }
 
     private int expandAroundCenter(String s, int left, int right) {
-        int L = left, R = right;
-        while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
-            L--;
-            R++;
+        // if str[left] = str[right], left--&&right++
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
         }
-        return R - L - 1;
+        //因为上面循环多加了一次l&&r，相当于（right-1）-（left+1）+1
+        return right - left - 1;
     }
+
+    /***
+     * 共享变量的思想，和之前有一点差别
+     */
+//    private int index, len;
+//
+//    public String longestPalindrome(String s) {
+//        if(s.length() < 2)
+//            return s;
+//        for(int i = 0; i < s.length()-1; i++){
+//            PalindromeHelper(s, i, i);
+//            PalindromeHelper(s, i, i+1);
+//        }
+//        return s.substring(index, index+len);
+//    }
+//    public void PalindromeHelper(String s, int l, int r){
+//        while(l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)){
+//            l--;
+//            r++;
+//        }
+//        if(len < r - l - 1){
+//            index = l + 1;
+//            len = r - l - 1;
+//        }
+//    }
 
 }

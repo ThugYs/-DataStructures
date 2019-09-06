@@ -1,5 +1,11 @@
 package Algorithm;
 
+/** 动态规划解题思路
+ * No1 状态
+ * No2 转移方程
+ * No3 初始化
+ * No4 结果
+ */
 public class DynamicProgramming {
     /***
      * table[n][w]
