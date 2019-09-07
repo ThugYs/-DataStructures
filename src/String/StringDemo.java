@@ -39,12 +39,21 @@ public class StringDemo {
         // 它在做运算的时候（s2 = s1+s2） 却新建了一个字符串"helloworld"
         // 放在常量池中，再加上之前的两个(s1,s2)，一共有三个地址。change方法中的s2指向"helloworld"
         // 但主方法中的s1、s2依然指向的原来的地址("hello"、"world")，其中的内容没有任何的改变，所以说是值传递。
-
+        String n = "213123423";
+        long res = 11111;
+        System.out.println(-(int)res);
+        System.out.println(Integer.parseInt(n));
+        System.out.println(Integer.valueOf(n));
         System.out.println("-------");
         String s1 = "hello";
         String s2 = "world";
         String s3 = "helloworld";
         String s4 = "hello" +"world";
+        char [] ch = {'1','2','3'};
+        ch[0] = '1';
+        System.out.println(ch[1]);
+
+
 
         System.out.println(s3 == s1 + s2); //false 重载了+运算符
         System.out.println(s3 == s1 + "world");//false 同上

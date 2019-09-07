@@ -16,8 +16,6 @@ public class LongestPalindromeSubstring {
      * 我们观察到回文中心的两侧互为镜像。因此，回文可以从它的中心展开，并且只有 2n - 12n−1 个这样的中心。
      * 你可能会问，为什么会是 2n - 12n−1 个，而不是 nn 个中心？
      * 原因在于所含字母数为偶数的回文的中心可以处于两字母之间（例如 “abba” 的中心在两个‘b’ 之间）
-     * @param s
-     * @return
      */
     public String longestPalindrome(String s) {
         if (s == null || s.length() < 1) {
@@ -74,5 +72,6 @@ public class LongestPalindromeSubstring {
 //            len = r - l - 1;
 //        }
 //    }
+
 
 }
